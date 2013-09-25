@@ -14,6 +14,9 @@ module SimpleRouter
     end
   end
 
+  class ItemsController < Controller
+  end
+
   class MyApplication < Sinatra::Base
     include SimpleRouter
   end

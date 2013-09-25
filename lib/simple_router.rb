@@ -1,6 +1,7 @@
-require "simple_router/version"
-
 module SimpleRouter
+  autoload :Version, "simple_router/version"
+  autoload :Controller, "simple_router/controller"
+
   def self.included(base)
     if base.ancestors.include?(Sinatra::Base)
       base.extend(ClassMethods)
