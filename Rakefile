@@ -12,6 +12,13 @@ task :install => :build do
   system "gem install pkg/simple_router-#{SimpleRouter::VERSION}.gem"
 end
 
+task :release => :build do
+  system "git tag -a v#{SimpleRouter::VERSION} -m 'Tagging #{SimpleRouter::VERSION}'"
+  system "git push --tags"
+  system "gem push pkg/simple_router-#{SimpleRouter::VERSION}.gem"
+  system "rm -rf pkg"
+end
+
 RSpec::Core::RakeTask.new("spec") do |spec|
   spec.pattern = "spec/**/*_spec.rb"
 end
