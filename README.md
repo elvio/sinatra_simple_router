@@ -1,6 +1,6 @@
 # SimpleRouter
 
-TODO: Write a gem description
+Simple routing abstraction to Sinatra applications. 
 
 ## Installation
 
@@ -18,7 +18,36 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "sinatra"
+require "simple_router"
+
+class UsersController < SimpleRouter::Controller
+    def show
+        @user = User.find(params[:id])
+        erb :"users/show"
+    end
+    
+    def update
+        @user = User.find(params[:id])
+        @user.update_attributes(params[:user])
+        redirect "/users/#{@user.id}"
+    end
+end
+
+class Application < Sinatra::Base
+    include SimpleRouter
+    
+    match :get, "/users/:id", UsersController, :show
+    match :patch, "/users/:id", UsersController, :update
+end
+```
+
+## Missing features
+
+- Support before/after filters
+- Named routes + Helpers
+- Support more than one method (such as: match [:patch, :put] ...)
 
 ## Contributing
 
