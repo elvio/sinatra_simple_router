@@ -1,4 +1,4 @@
-module SimpleRouter
+module SinatraSimpleRouter
   class Controller
     def initialize(app)
       @app = app

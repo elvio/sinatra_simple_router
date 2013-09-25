@@ -1,12 +1,12 @@
-module SimpleRouter
-  autoload :Version, "simple_router/version"
-  autoload :Controller, "simple_router/controller"
+module SinatraSimpleRouter
+  autoload :Version, "sinatra_simple_router/version"
+  autoload :Controller, "sinatra_simple_router/controller"
 
   def self.included(base)
     if base.ancestors.include?(Sinatra::Base)
       base.extend(ClassMethods)
     else
-      raise "SimpleRouter needs to be included in a Sinatra::Base decendent"
+      raise "SinatraSimpleRouter needs to be included in a Sinatra::Base decendent"
     end
   end
 

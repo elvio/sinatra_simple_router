@@ -1,18 +1,18 @@
 require "spec_helper"
-require "simple_router"
+require "sinatra_simple_router"
 
-module SimpleRouter
-  describe SimpleRouter do
+module SinatraSimpleRouter
+  describe SinatraSimpleRouter do
     describe ".included" do
       context "in a Sinatra::Base ancestors" do
         it "includes the method" do
-          expect { HasAncestor.send(:include, SimpleRouter) }.to_not raise_error
+          expect { HasAncestor.send(:include, SinatraSimpleRouter) }.to_not raise_error
         end
       end
 
       context "in a non Sinatra::Base ancestors" do
         it "raises an exception" do
-          expect { DoesntHaveAncestor.send(:include, SimpleRouter) }.to raise_error
+          expect { DoesntHaveAncestor.send(:include, SinatraSimpleRouter) }.to raise_error
         end
       end
     end

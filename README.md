@@ -1,4 +1,4 @@
-# SimpleRouter
+# SinatraSimpleRouter
 
 Simple routing abstraction to Sinatra applications. 
 
@@ -6,7 +6,7 @@ Simple routing abstraction to Sinatra applications.
 
 Add this line to your application's Gemfile:
 
-    gem 'simple_router'
+    gem 'sinatra_simple_router'
 
 And then execute:
 
@@ -14,15 +14,15 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install simple_router
+    $ gem install sinatra_simple_router
 
 ## Usage
 
 ```ruby
 require "sinatra"
-require "simple_router"
+require "sinatra_simple_router"
 
-class UsersController < SimpleRouter::Controller
+class UsersController < SinatraSimpleRouter::Controller
     def show
         @user = User.find(params[:id])
         erb :"users/show"
@@ -36,7 +36,7 @@ class UsersController < SimpleRouter::Controller
 end
 
 class Application < Sinatra::Base
-    include SimpleRouter
+    include SinatraSimpleRouter
     
     match :get, "/users/:id", UsersController, :show
     match :patch, "/users/:id", UsersController, :update

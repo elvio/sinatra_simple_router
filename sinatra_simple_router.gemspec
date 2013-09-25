@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'simple_router/version'
+require 'sinatra_simple_router/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "simple_router"
-  spec.version       = SimpleRouter::VERSION
+  spec.name          = "sinatra_simple_router"
+  spec.version       = SinatraSimpleRouter::VERSION
   spec.authors       = ["elvio"]
   spec.email         = ["elvio@elviovicosa.com"]
-  spec.description   = %q{A nice description}
-  spec.summary       = %q{A nice summary}
+  spec.description   = %q{Simple routing abstraction to Sinatra applications}
+  spec.summary       = %q{Simple routing and controller abstraction to Sinatra applications}
   spec.homepage      = ""
   spec.license       = "MIT"
 

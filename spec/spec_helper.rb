@@ -1,9 +1,9 @@
 require "rubygems"
 require "bundler/setup"
-require "simple_router"
+require "sinatra_simple_router"
 require "sinatra"
 
-module SimpleRouter
+module SinatraSimpleRouter
   class UsersController
     def initialize(app)
       @app = app
@@ -18,7 +18,7 @@ module SimpleRouter
   end
 
   class MyApplication < Sinatra::Base
-    include SimpleRouter
+    include SinatraSimpleRouter
   end
 
   class HasAncestor < Sinatra::Base

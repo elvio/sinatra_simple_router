@@ -1,7 +1,7 @@
 require "spec_helper"
-require "simple_router"
+require "sinatra_simple_router"
 
-module SimpleRouter
+module SinatraSimpleRouter
   describe Controller do
     describe "method delegation" do
       let(:app) { double("App", body: "") }

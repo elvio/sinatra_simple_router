@@ -5,18 +5,18 @@ require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 
 task :build do
-  system "gem build simple_router.gemspec"
+  system "gem build sinatra_simple_router.gemspec"
 end
 
 task :install => :build do
-  system "gem install pkg/simple_router-#{SimpleRouter::VERSION}.gem"
+  system "gem install pkg/sinatra_simple_router-#{SinatraSimpleRouter::VERSION}.gem"
 end
 
 task :release => :build do
-  system "git tag -a v#{SimpleRouter::VERSION} -m 'Tagging #{SimpleRouter::VERSION}'"
+  system "git tag -a v#{SinatraSimpleRouter::VERSION} -m 'Tagging #{SinatraSimpleRouter::VERSION}'"
   system "git push --tags"
-  system "gem push pkg/simple_router-#{SimpleRouter::VERSION}.gem"
-  system "rm -rf pkg"
+  system "gem push sinatra_simple_router-#{SinatraSimpleRouter::VERSION}.gem"
+  system "rm *.gem"
 end
 
 RSpec::Core::RakeTask.new("spec") do |spec|
