@@ -35,11 +35,19 @@ class UsersController < SinatraSimpleRouter::Controller
     end
 end
 
+class ItemsController < SinatraSimpleRouter::Controller
+    def show
+      @item = Item.find(params[:id])
+      render json: @item
+    end
+end
+
 class Application < Sinatra::Base
     include SinatraSimpleRouter
-    
+
     match :get, "/users/:id", UsersController, :show
     match :patch, "/users/:id", UsersController, :update
+    match :get, "/items/:id.json", ItemsController, :show
 end
 ```
 
