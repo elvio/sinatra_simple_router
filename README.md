@@ -1,5 +1,8 @@
 # SinatraSimpleRouter
 
+[![Build Status](https://travis-ci.org/elvio/sinatra_simple_router.png)](https://travis-ci.org/elvio/sinatra_simple_router)
+[![RubyGem](https://badge.fury.io/rb/sinatra_simple_router.png)](https://rubygems.org/gems/sinatra_simple_router)
+
 Simple routing abstraction for Sinatra applications. 
 
 ## Installation
