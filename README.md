@@ -1,6 +1,6 @@
 # SinatraSimpleRouter
 
-Simple routing abstraction to Sinatra applications. 
+Simple routing abstraction for Sinatra applications. 
 
 ## Installation
 
@@ -42,12 +42,6 @@ class Application < Sinatra::Base
     match :patch, "/users/:id", UsersController, :update
 end
 ```
-
-## Missing features
-
-- Support before/after filters
-- Named routes + Helpers
-- Support more than one method (such as: match [:patch, :put] ...)
 
 ## Contributing
 
