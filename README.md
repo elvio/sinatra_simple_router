@@ -25,19 +25,19 @@ Or install it yourself as:
 require "sinatra"
 require "sinatra_simple_router"
 
-class UsersController < SinatraSimpleRouter::Controller
-    def show
-        @user = User.find(params[:id])
-        erb :"users/show"
+class OrdersController
+    def initialize(app)
+        @app = app
     end
-    
-    def update
-        @user = User.find(params[:id])
-        @user.update_attributes(params[:user])
-        redirect "/users/#{@user.id}"
+
+    def show
+        @order = Order.find(params[:id])
+        @app.content_type "application/json"
+        @app.body @order.to_json
     end
 end
 
+# Using the builtin SinatraSimpleRouter::Controller
 class ItemsController < SinatraSimpleRouter::Controller
     def show
       @item = Item.find(params[:id])
@@ -48,8 +48,7 @@ end
 class Application < Sinatra::Base
     include SinatraSimpleRouter
 
-    match :get, "/users/:id", UsersController, :show
-    match :patch, "/users/:id", UsersController, :update
+    match :get, "/orders/:id.json", OrdersController, :show
     match :get, "/items/:id.json", ItemsController, :show
 end
 ```
