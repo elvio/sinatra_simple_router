@@ -4,19 +4,18 @@ module SinatraSimpleRouter
       @app = app
     end
 
-    def render(options = {})
-      if code=options[:status].to_i and code > 0
-        status code
-      end
+    def render(attrs = {})
+      code = attrs[:status].to_i
+      status(code) if code > 0
 
-      if html=options[:html]
+      if attrs[:html]
         content_type "text/html"
-        body html.to_s
-      elsif json=options[:json]
+        body attrs[:html].to_s
+      elsif attrs[:json]
         content_type "application/json"
-        body json.to_json
+        body attrs[:json].to_json
       else
-        raise ArgumentError.new("Unknown format in #{options.keys.sort}")
+        raise ArgumentError.new("Unknown format in #{attrs.inspect}")
       end
     end
 
