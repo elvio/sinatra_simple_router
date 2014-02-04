@@ -18,14 +18,18 @@ module SinatraSimpleRouter
     end
 
     describe ".match" do
-      before do
-        MyApplication.match(:get, "/", UsersController, :index)
-      end
-
       it "dispatches the route to the controller class and action" do
-        request = Rack::MockRequest.new(MyApplication)
+        request = Rack::MockRequest.new(SimpleApplication)
         response = request.get("/")
-        expect(response.body).to eq("it works")
+        expect(response.body).to eq("index")
+      end
+    end
+
+    describe ".version" do
+      it "uses the specified version as prefix" do
+        request = Rack::MockRequest.new(VersionedApplication)
+        response = request.post("/v1/subscribe")
+        expect(response.body).to eq("subscribe")
       end
     end
   end

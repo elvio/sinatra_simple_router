@@ -12,9 +12,20 @@ module SinatraSimpleRouter
 
   module ClassMethods
     def match(method, path, klass, action)
+      if @version
+        path = "/#{@version}#{path}"
+      end
+
+      puts "Registering: #{path}"
       send(method, path) do
         klass.new(self).send(action)
       end
+    end
+
+    def version(version, &block)
+      @version = version
+      instance_eval(&block)
+      @version = nil
     end
   end
 end

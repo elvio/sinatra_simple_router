@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/elvio/sinatra_simple_router.png)](https://travis-ci.org/elvio/sinatra_simple_router)
 [![RubyGem](https://badge.fury.io/rb/sinatra_simple_router.png)](https://rubygems.org/gems/sinatra_simple_router)
 
-Simple routing abstraction for Sinatra applications. 
+Simple routing abstraction for Sinatra applications.
 
 ## Installation
 
@@ -37,7 +37,15 @@ class OrdersController
     end
 end
 
-# Using the builtin SinatraSimpleRouter::Controller
+class Application < Sinatra::Base
+    include SinatraSimpleRouter
+    match :get, "/orders/:id.json", OrdersController, :show
+end
+```
+
+### SinatraSimpleRouter::Controller
+
+```ruby
 class ItemsController < SinatraSimpleRouter::Controller
     def show
       @item = Item.find(params[:id])
@@ -47,9 +55,42 @@ end
 
 class Application < Sinatra::Base
     include SinatraSimpleRouter
-
-    match :get, "/orders/:id.json", OrdersController, :show
     match :get, "/items/:id.json", ItemsController, :show
+end
+```
+
+### Versioning URLs
+
+```ruby
+require "sinatra"
+require "sinatra_simple_router"
+
+class V1::ItemsController < SinatraSimpleRouter::Controller
+    def show
+      @item = Item.find(params[:id])
+      render json: @item
+    end
+end
+
+class V2::ItemsController < SinatraSimpleRouter::Controller
+    def show
+      @item = Item.find(params[:id])
+      render json: ItemDecorator.new(@item).to_json
+    end
+end
+
+class Application < Sinatra::Base
+    include SinatraSimpleRouter
+
+    # maps '/v1/items/:id.json' to V1::ItemsController
+    version :v1 do
+      match :get, "/items/:id.json", V1::ItemsController, :show
+    end
+
+    # maps '/v2/items/:id.json' to V2::ItemsController
+    version :v2 do
+      match :get, "/items/:id.json", V2::ItemsController, :show
+    end
 end
 ```
 
