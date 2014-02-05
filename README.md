@@ -94,6 +94,28 @@ class Application < Sinatra::Base
 end
 ```
 
+### Rescue exceptions raised in controllers
+
+```ruby
+class ItemsController < SinatraSimpleRouter::Controller
+  def create
+    @item = Item.new(params[:item])
+    @item.save!
+    render json: @item
+  end
+end
+
+class Application < Sinatra::Base
+  include SinatraSimpleRouter
+
+  rescue_exception MongoMapper::DocumentNotValid do |exception, controller|
+    controller.render json: {error: exception.document.errors}, status: 400
+  end
+
+  match :post, "/items.json", ItemsController, :create
+end
+```
+
 ## Contributing
 
 1. Fork it

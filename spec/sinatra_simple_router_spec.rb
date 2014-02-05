@@ -32,5 +32,15 @@ module SinatraSimpleRouter
         expect(response.body).to eq("subscribe")
       end
     end
+
+    describe ".rescue_exception" do
+      it "calls the callback block" do
+        RescuedApplication.stub(:handle_exception)
+        request = Rack::MockRequest.new(RescuedApplication)
+        request.post("/subscribe")
+        arguments = [kind_of(ArgumentError), kind_of(SinatraSimpleRouter::UsersController)]
+        expect(RescuedApplication).to have_received(:handle_exception).with(*arguments)
+      end
+    end
   end
 end

@@ -13,10 +13,12 @@ task :install => :build do
 end
 
 task :release => :build do
-  system "git tag -a v#{SinatraSimpleRouter::VERSION} -m 'Tagging #{SinatraSimpleRouter::VERSION}'"
-  system "git push --tags"
-  system "gem push sinatra_simple_router-#{SinatraSimpleRouter::VERSION}.gem"
-  system "rm *.gem"
+  cmds = []
+  cmds << "git tag -a v#{SinatraSimpleRouter::VERSION} -m 'Tagging #{SinatraSimpleRouter::VERSION}'"
+  cmds << "git push --tags"
+  cmds << "gem push sinatra_simple_router-#{SinatraSimpleRouter::VERSION}.gem"
+  cmds << "rm *.gem"
+  system cmds.join(' && ')
 end
 
 RSpec::Core::RakeTask.new("spec") do |spec|
