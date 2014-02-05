@@ -16,7 +16,6 @@ module SinatraSimpleRouter
         path = "/#{@version}#{path}"
       end
 
-      puts "Registering: #{path}"
       send(method, path) do
         klass.new(self).send(action)
       end
